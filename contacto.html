@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectroShop - Contacto</title>
+    <link rel="stylesheet" href="preentrega2 electroshop.css">
+</head>
+<body>
+    <div class="contenedor">
+        <!-- encabezado -->
+        <header class="encabezado">
+            <h1 class="titulo">ElectroShop</h1>
+            <nav class="navegacion">
+                <a href="index.html" class="enlace-nav">Inicio</a>
+                <a href="productos.html" class="enlace-nav">Productos</a>
+                <a href="nosotros.html" class="enlace-nav">Nosotros</a>
+                <a href="servicios.html" class="enlace-nav">Servicios</a>
+                <a href="contacto.html" class="enlace-nav activo">Contacto</a>
+            </nav>
+        </header>
+
+        <!-- cuerpo -->
+        <main>
+            <!-- contacto -->
+            <section class="seccion-contacto">
+                <h2 class="titulo-seccion">Contacto</h2>
+                
+                <div class="contacto-grid">
+                    <div class="contacto-info">
+                        <h3>Información de Contacto</h3>
+                        <p><strong>Dirección:</strong> Av. Corrientes 1234, Buenos Aires</p>
+                        <p><strong>Teléfono:</strong> +54 1111111111</p>
+                        <p><strong>Email:</strong> contacto@electroshop.com</p>
+                        <p><strong>Horario:</strong> Lunes a Viernes 9:00 - 18:00</p>
+                        
+                        
+                    
+                    <div class="contacto-form-container">
+                        <h3>Envíanos un Mensaje</h3>
+                        <form class="formulario-contacto">
+                            <div class="grupo-formulario">
+                                <label class="etiqueta-formulario">Nombre:</label>
+                                <input 
+                                    type="text" 
+                                    class="entrada-formulario"
+                                    placeholder="Tu nombre"
+                                    required
+                                />
+                            </div>
+                            <div class="grupo-formulario">
+                                <label class="etiqueta-formulario">Correo Electrónico:</label>
+                                <input 
+                                    type="email" 
+                                    class="entrada-formulario"
+                                    placeholder="tu@correo.com"
+                                    required
+                                />
+                            </div>
+                            <div class="grupo-formulario">
+                                <label class="etiqueta-formulario">Asunto:</label>
+                                <select class="entrada-formulario">
+                                    <option value="">Selecciona un asunto</option>
+                                    <option value="consulta">Consulta sobre productos</option>
+                                    <option value="soporte">Soporte técnico</option>
+                                    <option value="ventas">Ventas corporativas</option>
+                                    <option value="otros">Otros</option>
+                                </select>
+                            </div>
+                            <div class="grupo-formulario">
+                                <label class="etiqueta-formulario">Mensaje:</label>
+                                <textarea 
+                                    class="entrada-formulario"
+                                    rows="4"
+                                    placeholder="Escribe tu mensaje aquí"
+                                    required
+                                ></textarea>
+                            </div>
+                            <button 
+                                type="submit" 
+                                class="boton-enviar"
+                            >
+                                Enviar Mensaje
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- pie de página -->
+        <footer class="pie-pagina">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>ElectroShop</h3>
+                    <p>Tu tienda de confianza desde 2010</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>Teléfono: +54 1111111111</p>
+                    <p>Email: contacto@electroshop.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Seguinos</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Instagram</a>
+                        <a href="#" class="social-link">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2024 ElectroShop - Todos los derechos reservados</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
