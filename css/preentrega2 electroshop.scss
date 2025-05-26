@@ -1,0 +1,1389 @@
+// Variables
+$color-primary: #2563eb;
+$color-primary-dark: #1d4ed8;
+$color-primary-light: #3b82f6;
+$color-accent: #f59e0b;
+$color-accent-dark: #d97706;
+$color-text: #333333;
+$color-text-light: #666666;
+$color-background: #ffffff;
+$color-background-light: #f9fafb;
+$color-background-dark: #f3f4f6;
+$color-border: #e5e7eb;
+$color-success: #10b981;
+$color-error: #ef4444;
+$box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$border-radius: 8px;
+$transition-speed: 0.3s;
+
+// Animation Variables
+$anim-duration: 0.6s;
+$anim-timing: cubic-bezier(0.4, 0, 0.2, 1);
+
+// Keyframes
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+// Animation Classes
+.fade-in {
+  animation: fadeIn $anim-duration $anim-timing forwards;
+}
+
+.slide-up {
+  animation: slideUp $anim-duration $anim-timing forwards;
+}
+
+.slide-in-right {
+  animation: slideInRight $anim-duration $anim-timing forwards;
+}
+
+.slide-in-left {
+  animation: slideInLeft $anim-duration $anim-timing forwards;
+}
+
+.scale-in {
+  animation: scaleIn $anim-duration $anim-timing forwards;
+}
+
+.bounce {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+// Stagger animations for grid items
+@for $i from 1 through 12 {
+  .stagger-#{$i} {
+    animation-delay: #{$i * 0.1}s;
+  }
+}
+
+// Base styles
+body {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+.encabezado {
+  .titulo {
+    animation: slideInLeft 0.5s $anim-timing forwards;
+  }
+  
+  .navegacion {
+    animation: slideInRight 0.5s $anim-timing forwards;
+    
+    .enlace-nav {
+      position: relative;
+      transition: color 0.3s ease;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: $color-primary;
+        transition: width 0.3s ease;
+      }
+      
+      &:hover::after {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.titulo-seccion {
+  animation: slideUp 0.5s $anim-timing forwards;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: $color-primary;
+    animation: slideInRight 0.8s $anim-timing forwards;
+  }
+}
+
+.grid-categorias, .grid-productos, .servicios-grid {
+  .categoria, .producto, .servicio {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    
+    @for $i from 1 through 12 {
+      &:nth-child(#{$i}) {
+        animation: slideUp 0.5s $anim-timing forwards;
+        animation-delay: #{$i * 0.1}s;
+      }
+    }
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+.producto-imagen {
+  overflow: hidden;
+  
+  img {
+    transition: transform 0.5s ease;
+  }
+  
+  &:hover img {
+    transform: scale(1.1);
+  }
+}
+
+.etiqueta-oferta, .etiqueta-nuevo {
+  opacity: 0;
+  transform: scale(0);
+  animation: scaleIn 0.3s $anim-timing forwards;
+  animation-delay: 0.5s;
+}
+
+.boton-principal, .boton-producto, .boton-enviar, .boton-servicio {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    
+    &::before {
+      left: 100%;
+    }
+  }
+}
+
+.contacto-info, .contacto-form-container {
+  opacity: 0;
+  animation: slideUp 0.5s $anim-timing forwards;
+}
+
+.formulario-contacto {
+  .grupo-formulario {
+    opacity: 0;
+    transform: translateY(10px);
+    
+    @for $i from 1 through 6 {
+      &:nth-child(#{$i}) {
+        animation: slideUp 0.3s $anim-timing forwards;
+        animation-delay: #{$i * 0.1}s;
+      }
+    }
+  }
+}
+
+.footer-grid {
+  .footer-section {
+    opacity: 0;
+    animation: fadeIn 0.5s $anim-timing forwards;
+    
+    @for $i from 1 through 3 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.2}s;
+      }
+    }
+  }
+}
+
+.copyright {
+  opacity: 0;
+  animation: fadeIn 0.5s $anim-timing forwards;
+  animation-delay: 1s;
+}
+
+// Breakpoints
+$breakpoint-mobile: 576px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+
+// Spacing
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-xxl: 48px;
+$spacing-xxxl: 64px;
+
+// Animation Variables
+$anim-duration-fast: 0.2s;
+$anim-duration-medium: 0.5s;
+$anim-duration-slow: 0.8s;
+$anim-easing: cubic-bezier(0.16, 1, 0.3, 1);
+$anim-delay-stagger: 0.1s;
+
+// Mixins
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+  @if $gap != 0 {
+    gap: $gap;
+  }
+}
+
+@mixin grid($columns: 1fr, $gap: $spacing-lg) {
+  display: grid;
+  grid-template-columns: $columns;
+  gap: $gap;
+}
+
+@mixin transition($property: all, $duration: $transition-speed, $timing: ease) {
+  transition: $property $duration $timing;
+}
+
+@mixin hover-transform($y: -2px) {
+  @include transition(transform);
+  &:hover {
+    transform: translateY($y);
+  }
+}
+
+@mixin card {
+  border-radius: $border-radius;
+  overflow: hidden;
+  background-color: $color-background;
+  box-shadow: $box-shadow;
+  @include hover-transform;
+}
+
+@mixin button($bg-color: $color-primary, $text-color: white, $padding-v: 12px, $padding-h: 24px) {
+  display: inline-block;
+  background-color: $bg-color;
+  color: $text-color;
+  padding: $padding-v $padding-h;
+  border-radius: $border-radius;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  @include transition(background-color);
+  @include hover-transform;
+  
+  &:hover {
+    background-color: darken($bg-color, 5%);
+  }
+}
+
+@mixin section-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: $spacing-lg;
+  color: $color-text;
+  position: relative;
+  padding-bottom: $spacing-sm;
+  
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background-color: $color-primary;
+    @include transition(width, $anim-duration-medium, $anim-easing);
+  }
+}
+
+// Animation Mixins
+@mixin fade-in($duration: $anim-duration-medium, $delay: 0) {
+  opacity: 0;
+  animation: fadeIn $duration $anim-easing $delay forwards;
+}
+
+@mixin slide-up($duration: $anim-duration-medium, $delay: 0) {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp $duration $anim-easing $delay forwards;
+}
+
+@mixin slide-in-right($duration: $anim-duration-medium, $delay: 0) {
+  opacity: 0;
+  transform: translateX(20px);
+  animation: slideInRight $duration $anim-easing $delay forwards;
+}
+
+@mixin slide-in-left($duration: $anim-duration-medium, $delay: 0) {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: slideInLeft $duration $anim-easing $delay forwards;
+}
+
+@mixin scale-in($duration: $anim-duration-medium, $delay: 0) {
+  opacity: 0;
+  transform: scale(0.95);
+  animation: scaleIn $duration $anim-easing $delay forwards;
+}
+
+@mixin pulse($duration: $anim-duration-medium) {
+  animation: pulse $duration $anim-easing infinite alternate;
+}
+
+// Placeholders
+%image-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+%container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+}
+
+%link-hover {
+  position: relative;
+  
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: $color-primary;
+    @include transition(width);
+  }
+  
+  &:hover::after, &.activo::after {
+    width: 100%;
+  }
+}
+
+// Reset y estilos base
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: $color-text;
+  line-height: 1.6;
+  background-color: $color-background-light;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+// Animated classes
+.animate-on-scroll {
+  opacity: 0;
+  
+  &.fade-in {
+    @include fade-in;
+  }
+  
+  &.slide-up {
+    @include slide-up;
+  }
+  
+  &.slide-in-right {
+    @include slide-in-right;
+  }
+  
+  &.slide-in-left {
+    @include slide-in-left;
+  }
+  
+  &.scale-in {
+    @include scale-in;
+  }
+}
+
+// Staggered animations
+.stagger-children {
+  > * {
+    @for $i from 1 through 10 {
+      &:nth-child(#{$i}) {
+        animation-delay: $anim-delay-stagger * $i;
+      }
+    }
+  }
+}
+
+// Botones
+.boton {
+  &-principal {
+    @include button($color-accent, white);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, transparent, rgba(white, 0.2), transparent);
+      transition: left 0.5s $anim-easing;
+    }
+    
+    &:hover::before {
+      left: 100%;
+    }
+  }
+  
+  &-producto {
+    @include button($color-primary, white, 12px, 12px);
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background-color: rgba(black, 0.1);
+      z-index: -1;
+      transition: height 0.3s $anim-easing;
+    }
+    
+    &:hover::after {
+      height: 100%;
+    }
+  }
+  
+  &-enviar {
+    @include button($color-primary, white, 12px, 12px);
+    margin-top: $spacing-sm;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background-color: rgba(white, 0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.5s $anim-easing, height 0.5s $anim-easing;
+      z-index: -1;
+    }
+    
+    &:active::after {
+      width: 150px;
+      height: 150px;
+      opacity: 0;
+    }
+  }
+  
+  &-servicio {
+    @include button($color-primary-light, white, 10px, 10px);
+    display: block;
+    text-align: center;
+    transition: all 0.3s $anim-easing;
+    
+    &:hover {
+      box-shadow: 0 6px 15px rgba($color-primary, 0.3);
+    }
+  }
+  
+  &-plan {
+    @include button;
+    transition: all 0.3s $anim-easing;
+    
+    &:hover {
+      box-shadow: 0 8px 15px rgba($color-primary, 0.3);
+    }
+  }
+}
+
+// Layout
+.contenedor {
+  @extend %container;
+}
+
+main {
+  min-height: 70vh;
+  padding: $spacing-xl 0;
+}
+
+section {
+  margin-bottom: $spacing-xxxl;
+}
+
+// Encabezado
+.encabezado {
+  @include flex(row, space-between, center);
+  padding: $spacing-md 0;
+  border-bottom: 1px solid $color-border;
+  margin-bottom: $spacing-lg;
+  animation: slideInDown 0.6s $anim-easing;
+  
+  .titulo {
+    font-size: 32px;
+    font-weight: 700;
+    color: $color-primary;
+    @include slide-in-left($anim-duration-medium, 0.1s);
+  }
+  
+  .navegacion {
+    @include flex(row, flex-start, center, nowrap, $spacing-lg);
+    @include slide-in-right($anim-duration-medium, 0.2s);
+    
+    .enlace-nav {
+      font-weight: 500;
+      color: $color-text;
+      padding: $spacing-sm 0;
+      @include transition(color);
+      @extend %link-hover;
+      
+      &:hover, &.activo {
+        color: $color-primary;
+      }
+    }
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// Títulos de sección
+.titulo-seccion {
+  @include section-title;
+  
+  &::after {
+    animation: expandWidth 1s $anim-easing forwards;
+  }
+}
+
+@keyframes expandWidth {
+  from { width: 0; }
+  to { width: 80px; }
+}
+
+// Introducción
+.introduccion {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto $spacing-xxl;
+  
+  .texto {
+    font-size: 18px;
+    margin-bottom: $spacing-xl;
+    color: $color-text-light;
+    @include slide-up($anim-duration-medium, 0.3s);
+  }
+}
+
+.banner {
+  background: linear-gradient(rgba(37, 99, 235, 0.8), rgba(37, 99, 235, 0.9)), url('https://images.pexels.com/photos/4050387/pexels-photo-4050387.jpeg');
+  background-size: cover;
+  background-position: center;
+  padding: $spacing-xxl;
+  border-radius: $border-radius;
+  color: white;
+  text-align: center;
+  margin-top: $spacing-xl;
+  position: relative;
+  overflow: hidden;
+  @include scale-in($anim-duration-medium, 0.2s);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(black, 0.1), transparent);
+    animation: shimmerBackground 8s infinite alternate linear;
+  }
+  
+  &-content {
+    position: relative;
+    z-index: 1;
+    
+    h3 {
+      font-size: 28px;
+      margin-bottom: $spacing-md;
+      @include slide-up($anim-duration-medium, 0.3s);
+    }
+    
+    p {
+      font-size: 18px;
+      margin-bottom: $spacing-lg;
+      @include slide-up($anim-duration-medium, 0.4s);
+    }
+  }
+}
+
+@keyframes shimmerBackground {
+  from { 
+    transform: translateX(-50px) translateY(-50px);
+  }
+  to { 
+    transform: translateX(50px) translateY(50px);
+  }
+}
+
+// Categorías
+.grid-categorias {
+  @include grid(repeat(auto-fill, minmax(280px, 1fr)));
+  margin-top: $spacing-xl;
+  @extend .stagger-children;
+}
+
+.categoria {
+  @include card;
+  @include slide-up;
+  
+  &-imagen {
+    height: 200px;
+    overflow: hidden;
+    
+    img {
+      @extend %image-cover;
+      @include transition(transform, 0.5s);
+    }
+  }
+  
+  &:hover {
+    .categoria-imagen img {
+      transform: scale(1.05);
+    }
+  }
+  
+  h3 {
+    padding: $spacing-md;
+    text-align: center;
+    font-weight: 600;
+    font-size: 18px;
+    transition: color 0.3s $anim-easing;
+  }
+  
+  &:hover h3 {
+    color: $color-primary;
+  }
+}
+
+// Productos
+.filtros {
+  @include flex(row, center, center, wrap, $spacing-sm);
+  margin-bottom: $spacing-lg;
+  @include fade-in($anim-duration-medium, 0.2s);
+}
+
+.filtro-btn {
+  padding: $spacing-sm $spacing-md;
+  background-color: $color-background;
+  border: 1px solid $color-border;
+  border-radius: 20px;
+  color: $color-text-light;
+  font-weight: 500;
+  transition: all 0.3s $anim-easing;
+  
+  &.activo, &:hover {
+    background-color: $color-primary;
+    color: white;
+    box-shadow: 0 4px 10px rgba($color-primary, 0.3);
+  }
+}
+
+.grid-productos {
+  @include grid(repeat(auto-fill, minmax(280px, 1fr)));
+  @extend .stagger-children;
+}
+
+.producto {
+  @include card;
+  @include fade-in;
+  
+  &-imagen {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    
+    .imagen-producto {
+      @extend %image-cover;
+      @include transition(transform, 0.5s);
+    }
+  }
+  
+  &:hover .imagen-producto {
+    transform: scale(1.05);
+  }
+  
+  &-info {
+    padding: $spacing-md;
+    transform: translateY(0);
+    transition: transform 0.3s $anim-easing;
+  }
+  
+  &:hover .producto-info {
+    transform: translateY(-5px);
+  }
+  
+  .titulo-producto {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: $spacing-sm;
+  }
+  
+  .descripcion-producto {
+    color: $color-text-light;
+    font-size: 14px;
+    margin-bottom: $spacing-sm * 1.5;
+  }
+  
+  .precio-producto {
+    font-size: 20px;
+    font-weight: 700;
+    color: $color-primary;
+    margin-bottom: $spacing-md;
+    transition: transform 0.3s $anim-easing;
+  }
+  
+  &:hover .precio-producto {
+    transform: scale(1.05);
+  }
+  
+  .precio-anterior {
+    text-decoration: line-through;
+    color: $color-text-light;
+    font-weight: 400;
+    font-size: 16px;
+    margin-right: $spacing-sm;
+  }
+}
+
+.etiqueta {
+  &-oferta, &-nuevo {
+    position: absolute;
+    top: $spacing-md;
+    right: $spacing-md;
+    padding: $spacing-xs $spacing-sm * 1.5;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transform: scale(0);
+    animation: popIn 0.5s $anim-easing 0.5s forwards;
+  }
+  
+  &-oferta {
+    background-color: $color-accent;
+    color: white;
+  }
+  
+  &-nuevo {
+    background-color: $color-success;
+    color: white;
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// Contacto
+.contacto-grid {
+  @include grid(1fr 1fr);
+}
+
+.contacto-info {
+  padding: $spacing-lg;
+  background-color: $color-background;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  @include slide-in-left;
+  
+  h3 {
+    font-size: 22px;
+    margin-bottom: $spacing-md;
+    color: $color-primary;
+  }
+  
+  p {
+    margin-bottom: $spacing-sm * 1.5;
+    transition: transform 0.3s $anim-easing;
+    
+    &:hover {
+      transform: translateX(5px);
+    }
+  }
+}
+
+.mapa {
+  margin-top: $spacing-lg;
+  border-radius: $border-radius;
+  overflow: hidden;
+  height: 200px;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: mapReveal 0.8s $anim-easing 0.4s forwards;
+  
+  img {
+    @extend %image-cover;
+  }
+}
+
+@keyframes mapReveal {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.contacto-form-container {
+  padding: $spacing-lg;
+  background-color: $color-background;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  @include slide-in-right;
+  
+  h3 {
+    font-size: 22px;
+    margin-bottom: $spacing-md;
+    color: $color-primary;
+  }
+}
+
+.formulario-contacto {
+  @include flex(column, flex-start, stretch, nowrap, $spacing-md);
+}
+
+.grupo-formulario {
+  @include flex(column, flex-start, stretch, nowrap, $spacing-sm);
+  @extend .stagger-children;
+}
+
+.etiqueta-formulario {
+  font-weight: 500;
+  transform: translateX(-5px);
+  opacity: 0;
+  animation: labelSlideIn 0.5s $anim-easing forwards;
+}
+
+@keyframes labelSlideIn {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.entrada-formulario {
+  padding: $spacing-sm * 1.5;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  font-family: inherit;
+  font-size: 16px;
+  @include transition(all, 0.3s, $anim-easing);
+  
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+    box-shadow: 0 0 0 3px rgba($color-primary, 0.2);
+    transform: translateY(-2px);
+  }
+  
+  &::placeholder {
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  
+  &:focus::placeholder {
+    opacity: 0.5;
+    transform: translateX(10px);
+  }
+}
+
+// Nosotros
+.historia, .valores, .equipo {
+  margin-bottom: $spacing-xxl;
+}
+
+.historia {
+  @include grid(1fr 1fr);
+  align-items: center;
+  
+  &-imagen {
+    border-radius: $border-radius;
+    overflow: hidden;
+    height: 320px;
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba($color-primary, 0.2);
+      opacity: 0;
+      transition: opacity 0.5s $anim-easing;
+      z-index: 1;
+    }
+    
+    &:hover::before {
+      opacity: 1;
+    }
+    
+    img {
+      @extend %image-cover;
+      transition: transform 0.8s $anim-easing;
+    }
+    
+    &:hover img {
+      transform: scale(1.1) rotate(2deg);
+    }
+  }
+  
+  &-contenido {
+    @include slide-in-right;
+    
+    h3 {
+      font-size: 24px;
+      color: $color-primary;
+      margin-bottom: $spacing-md;
+    }
+    
+    p {
+      margin-bottom: $spacing-md;
+      transform: translateY(10px);
+      opacity: 0;
+      animation: contentReveal 0.5s $anim-easing 0.3s forwards;
+    }
+  }
+}
+
+@keyframes contentReveal {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.valores, .equipo {
+  h3 {
+    font-size: 24px;
+    color: $color-primary;
+    margin-bottom: $spacing-md;
+    @include slide-up;
+  }
+}
+
+.valores-grid {
+  @include grid(repeat(auto-fill, minmax(250px, 1fr)));
+  margin-top: $spacing-lg;
+  @extend .stagger-children;
+}
+
+.valor {
+  padding: $spacing-lg;
+  background-color: $color-background;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  @include scale-in;
+  transition: transform 0.5s $anim-easing, box-shadow 0.5s $anim-easing;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  h4 {
+    font-size: 18px;
+    margin-bottom: $spacing-sm;
+    color: $color-primary;
+    position: relative;
+    padding-bottom: $spacing-xs;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: $color-primary;
+      transition: width 0.3s $anim-easing;
+    }
+  }
+  
+  &:hover h4::after {
+    width: 50px;
+  }
+}
+
+// Servicios
+.servicios-intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto $spacing-xl;
+  font-size: 18px;
+  color: $color-text-light;
+  @include slide-up;
+}
+
+.servicios-grid {
+  @include grid(repeat(auto-fill, minmax(280px, 1fr)));
+  margin-bottom: $spacing-xxl;
+  @extend .stagger-children;
+}
+
+.servicio {
+  padding: $spacing-lg;
+  background-color: $color-background;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  @include slide-up;
+  transition: transform 0.5s $anim-easing, box-shadow 0.5s $anim-easing;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  }
+  
+  &-icono {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto $spacing-md;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: transform 0.5s $anim-easing;
+    
+    img {
+      @extend %image-cover;
+      transition: transform 0.8s $anim-easing;
+    }
+  }
+  
+  &:hover .servicio-icono {
+    transform: scale(1.1);
+  }
+  
+  &:hover .servicio-icono img {
+    transform: scale(1.2);
+  }
+  
+  h3 {
+    text-align: center;
+    font-size: 20px;
+    color: $color-primary;
+    margin-bottom: $spacing-md;
+    transition: color 0.3s $anim-easing;
+  }
+  
+  &:hover h3 {
+    color: darken($color-primary, 10%);
+  }
+  
+  p {
+    margin-bottom: $spacing-md;
+  }
+  
+  &-detalles {
+    margin-bottom: $spacing-md;
+    
+    li {
+      position: relative;
+      padding-left: $spacing-lg;
+      margin-bottom: $spacing-sm;
+      opacity: 0.8;
+      transform: translateX(0);
+      transition: all 0.3s $anim-easing;
+      
+      &::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: $color-primary;
+        font-weight: bold;
+        transition: transform 0.3s $anim-easing;
+      }
+      
+      &:hover {
+        opacity: 1;
+        transform: translateX(5px);
+        
+        &::before {
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+}
+
+// Pie de página
+.pie-pagina {
+  background-color: $color-background;
+  padding: $spacing-xxl 0 $spacing-md;
+  border-top: 1px solid $color-border;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, $color-primary, $color-accent, $color-primary);
+    transform: scaleX(0);
+    animation: footerBorder 1s $anim-easing 0.5s forwards;
+  }
+}
+
+@keyframes footerBorder {
+  to { transform: scaleX(1); }
+}
+
+.footer-grid {
+  @include grid(repeat(auto-fit, minmax(250px, 1fr)));
+  margin-bottom: $spacing-xl;
+  @extend .stagger-children;
+}
+
+.footer-section {
+  @include fade-in;
+  
+  h3 {
+    font-size: 18px;
+    margin-bottom: $spacing-md;
+    color: $color-primary;
+    position: relative;
+    display: inline-block;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: $color-primary;
+      animation: underlineExpand 0.8s $anim-easing 0.8s forwards;
+    }
+  }
+}
+
+@keyframes underlineExpand {
+  to { width: 100%; }
+}
+
+.social-links {
+  @include flex(row, flex-start, center, nowrap, $spacing-md);
+}
+
+.social-link {
+  color: $color-text-light;
+  @include transition(all, 0.3s, $anim-easing);
+  transform: scale(1);
+  
+  &:hover {
+    color: $color-primary;
+    transform: scale(1.2);
+  }
+}
+
+.copyright {
+  text-align: center;
+  padding-top: $spacing-md;
+  border-top: 1px solid $color-border;
+  color: $color-text-light;
+  font-size: 14px;
+  opacity: 0;
+  animation: fadeIn 1s $anim-easing 1s forwards;
+}
+
+// Responsive
+@media (max-width: $breakpoint-tablet) {
+  .encabezado {
+    flex-direction: column;
+    gap: $spacing-md;
+    
+    .navegacion {
+      width: 100%;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: $spacing-sm;
+    }
+    
+    .enlace-nav {
+      padding: $spacing-sm;
+    }
+  }
+  
+  .historia, .contacto-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .historia-imagen {
+    order: -1;
+  }
+  
+  .banner {
+    padding: $spacing-xl $spacing-md;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .encabezado {
+    padding: $spacing-md 0;
+    
+    .titulo {
+      font-size: 28px;
+    }
+    
+    .navegacion {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      text-align: center;
+      gap: $spacing-sm;
+    }
+  }
+  
+  .filtros {
+    flex-direction: column;
+    align-items: center;
+    
+    .filtro-btn {
+      width: 100%;
+      max-width: 200px;
+    }
+  }
+  
+  .banner-content {
+    h3 {
+      font-size: 24px;
+    }
+    
+    p {
+      font-size: 16px;
+    }
+  }
+  
+  .planes-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .plan.destacado {
+    transform: none;
+    margin: $spacing-lg 0;
+  }
+}
