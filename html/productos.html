@@ -3,8 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explora nuestra amplia gama de productos en ElectroShop. Encuentra electrodomésticos de calidad para tu hogar.">
+    <meta name="keywords" content="Electrodomésticos, Cocina, Tecnología, Limpieza, Calidad, Garantía">
+    <meta name="author" content="ElectroShop">
+    <meta name="robots" content="index, follow">
     <title>ElectroShop - Productos</title>
     <link rel="stylesheet" href="../css/preentrega2 electroshop.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "ElectroShop - Productos",
+      "description": "Explora nuestra amplia gama de productos en ElectroShop. Encuentra electrodomésticos de calidad para tu hogar.",
+      "brand": {
+        "@type": "Brand",
+        "name": "ElectroShop"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Product",
+            "name": "Heladera No Frost",
+            "description": "Heladera de alta eficiencia con tecnología No Frost.",
+            "image": "https://images.pexels.com/photos/2343467/pexels-photo-2343467.jpeg",
+            "price": "320499",
+            "priceCurrency": "ARS"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Product",
+            "name": "Horno Eléctrico",
+            "description": "Horno eléctrico multifunción con control digital.",
+            "image": "https://images.pexels.com/photos/6920631/pexels-photo-6920631.jpeg",
+            "price": "145999",
+            "priceCurrency": "ARS"
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
     <div class="contenedor">
@@ -12,7 +52,7 @@
         <header class="encabezado">
             <h1 class="titulo">ElectroShop</h1>
             <nav class="navegacion">
-                <a href="index.html" class="enlace-nav">Inicio</a>
+                <a href="/index.html" class="enlace-nav">Inicio</a>
                 <a href="productos.html" class="enlace-nav activo">Productos</a>
                 <a href="nosotros.html" class="enlace-nav">Nosotros</a>
                 <a href="servicios.html" class="enlace-nav">Servicios</a>
@@ -24,22 +64,22 @@
         <main>
             <!-- productos -->
             <section class="productos">
-                <h2 class="titulo-seccion">Nuestros Productos</h2>
+                <h1 class="titulo-seccion">Nuestros Productos</h1>
                 
                 <div class="filtros">
-                    <button class="filtro-btn activo">Todos</button>
-                    <button class="filtro-btn">Cocina</button>
-                    <button class="filtro-btn">Tecnologia</button>
-                    <button class="filtro-btn">Limpieza</button>
+                    <button class="filtro-btn activo" data-categoria="todos">Todos</button>
+                    <button class="filtro-btn" data-categoria="cocina">Cocina</button>
+                    <button class="filtro-btn" data-categoria="tecnologia">Tecnología</button>
+                    <button class="filtro-btn" data-categoria="limpieza">Limpieza</button>
                 </div>
                 
                 <div class="grid-productos">
                     <!-- producto 1 -->
-                    <div class="producto">
+                    <div class="producto" data-categoria="cocina">
                         <div class="producto-imagen">
                             <img 
                                 src="https://images.pexels.com/photos/2343467/pexels-photo-2343467.jpeg?cs=srgb&dl=pexels-alex-qian-1180283-2343467.jpg&fm=jpg" 
-                                alt="Heladera"
+                                alt="Heladera No Frost"
                                 class="imagen-producto"
                             />
                             <span class="etiqueta-oferta">Oferta</span>
@@ -53,11 +93,11 @@
                     </div>
 
                     <!-- producto 2 -->
-                    <div class="producto">
+                    <div class="producto" data-categoria="cocina">
                         <div class="producto-imagen">
                             <img 
                                 src="https://images.pexels.com/photos/6920631/pexels-photo-6920631.jpeg?cs=srgb&dl=pexels-heyho-6920631.jpg&fm=jpg" 
-                                alt="Horno"
+                                alt="Horno Eléctrico"
                                 class="imagen-producto"
                             />
                         </div>
@@ -70,11 +110,11 @@
                     </div>
 
                     <!-- producto 3 -->
-                    <div class="producto">
+                    <div class="producto" data-categoria="limpieza">
                         <div class="producto-imagen">
                             <img 
                                 src="https://images.pexels.com/photos/7282378/pexels-photo-7282378.jpeg?cs=srgb&dl=pexels-sarah-chai-7282378.jpg&fm=jpg" 
-                                alt="Lavarropas"
+                                alt="Lavarropas Automático"
                                 class="imagen-producto"
                             />
                             <span class="etiqueta-nuevo">Nuevo</span>
@@ -88,11 +128,11 @@
                     </div>
 
                     <!-- producto 4 -->
-                    <div class="producto">
+                    <div class="producto" data-categoria="tecnologia">
                         <div class="producto-imagen">
                             <img 
                                 src="https://images.pexels.com/photos/7614540/pexels-photo-7614540.jpeg?cs=srgb&dl=pexels-heyho-7614540.jpg&fm=jpg" 
-                                alt="Microondas"
+                                alt="Microondas Digital"
                                 class="imagen-producto"
                             />
                         </div>
